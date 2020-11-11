@@ -1,15 +1,24 @@
-// Il programma dovrà chiedere all’utente il
-// numero di chilometri che vuole
-// percorrere e l’età del passeggero.
-// Sulla base di queste informazioni dovrà
-// calcolare il prezzo totale del viaggio.
-// Il prezzo del biglietto è definito in base ai
-// km (0.21 € al km), ma va applicato uno
-// sconto del 20% per i minorenni e del
-// 40% per gli over 65.
+/* Il programma dovrà chiedere all’utente il
+numero di chilometri che vuole
+percorrere e l’età del passeggero.
+Sulla base di queste informazioni dovrà
+calcolare il prezzo totale del viaggio.
+Il prezzo del biglietto è definito in base ai
+km (0.21 € al km), ma va applicato uno
+sconto del 20% per i minorenni e del
+40% per gli over 65. */
 
 // #1 Chiedere al passeggero il numero di Km da percorrere
 var km = parseInt(prompt("Quanti Km vuoi percorrere?"));
+
+if (km <= 0) {
+    alert("Visto che puoi sottrarre Km, allora ti rimborsiamo noi!");
+}
+
+if (isNaN(km)) {
+    alert("Per scrivere Km servo numeri, non lettere!");
+}
+
 console.log("Chilometri che hai scelto: " + km);
 
 // #2 Chiedere al passeggero la sua età
@@ -28,11 +37,23 @@ if (age < 18) {
     ticketPrice = discount20;
 }
 
-if (age >= 65) {
+if (age >= 65 && age < 100) {
     ticketPrice = discount40;
 }
 
-// #5 Risultato finale
-document.getElementById("result").innerHTML = "Il costo del tuo biglietto è: " + ticketPrice + " €";
-console.log("Prezzo del ticket finale: " + ticketPrice);
+if (age >= 100) {
+    ticketPrice = 0;
+}
 
+// #5 Risultato finale
+if (ticketPrice > 0) {
+    document.getElementById("result").innerHTML = "Il costo del tuo biglietto è: " + ticketPrice + " €";
+    console.log("Prezzo del ticket finale: " + ticketPrice);
+} else if (isNaN(ticketPrice)) {
+    document.getElementById("result").innerHTML = "Hai sbagliato qualche dato, riprova!";
+} else if (ticketPrice == 0) {
+    document.getElementById("result").innerHTML = "Viaggi Gratis!";
+} else {
+    document.getElementById("result").innerHTML = "La compagnia è debito con te di: " + ticketPrice + " €";
+    console.log("Prezzo del debito: " + ticketPrice);
+}
